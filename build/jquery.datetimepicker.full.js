@@ -581,21 +581,21 @@ var DateFormatter;
  */
 /*global DateFormatter, document,window,jQuery,setTimeout,clearTimeout,HighlightedDate,getCurrentValue*/
 ;(function (factory) {
-	if ( typeof define === 'function' && define.amd ) {
+  if ( typeof window === 'object' && typeof jQuery === 'function' ) {
+    // Browser globals
+		factory(jQuery);
+  } else if ( typeof define === 'function' && define.amd ) {
 		// AMD. Register as an anonymous module.
 		define(['jquery', 'jquery-mousewheel'], factory);
 	} else if (typeof exports === 'object') {
 		// Node/CommonJS style for Browserify
 		module.exports = factory;
-	} else {
-		// Browser globals
-		factory(jQuery);
 	}
 }(function ($) {
 	'use strict';
-	
+
 	var currentlyScrollingTimeDiv = false;
-	
+
 	var default_options  = {
 		i18n: {
 			ar: { // Arabic
@@ -1766,7 +1766,7 @@ var DateFormatter;
 								} else {
 									var splittedHours   = +([$(this).val()[0], $(this).val()[1]].join('')),
 										splittedMinutes = +([$(this).val()[2], $(this).val()[3]].join(''));
-	
+
 									// parse the numbers as 0312 => 03:12
 									if (!options.datepicker && options.timepicker && splittedHours >= 0 && splittedHours < 24 && splittedMinutes >= 0 && splittedMinutes < 60) {
 										$(this).val([splittedHours, splittedMinutes].map(function (item) {
@@ -1871,7 +1871,7 @@ var DateFormatter;
 					else {
 						_this.currentTime = _this.now();
 					}
-					
+
 					datetimepicker.trigger('xchange.xdsoft');
 				};
 
@@ -2095,7 +2095,7 @@ var DateFormatter;
                          * jquery timebox.css('marginTop') will return the original value which is before you clicking the next/prev button,
                          * meanwhile the timebox[0].style.marginTop will return the right value which is after you clicking the
                          * next/prev button.
-                         * 
+                         *
                          * What we should do:
                          * Replace timebox.css('marginTop') with timebox[0].style.marginTop.
                          */
@@ -2121,10 +2121,10 @@ var DateFormatter;
 					xchangeTimer = setTimeout(function () {
 
 						if (_xdsoft_datetime.currentTime === undefined || _xdsoft_datetime.currentTime === null) {
-							//In case blanks are allowed, delay construction until we have a valid date 
+							//In case blanks are allowed, delay construction until we have a valid date
 							if (options.allowBlank)
 								return;
-								
+
 							_xdsoft_datetime.currentTime = _xdsoft_datetime.now();
 						}
 
@@ -2284,7 +2284,7 @@ var DateFormatter;
 							optionDateTime = new Date(_xdsoft_datetime.currentTime);
 							optionDateTime.setHours(h);
 							optionDateTime.setMinutes(m);
-							classes = [];			
+							classes = [];
 							if ((options.minDateTime !== false && options.minDateTime > optionDateTime) || (options.maxTime !== false && _xdsoft_datetime.strtotime(options.maxTime).getTime() < now.getTime()) || (options.minTime !== false && _xdsoft_datetime.strtotime(options.minTime).getTime() > now.getTime())) {
 								classes.push('xdsoft_disabled');
 							} else if ((options.minDateTime !== false && options.minDateTime > optionDateTime) || ((options.disabledMinTime !== false && now.getTime() > _xdsoft_datetime.strtotime(options.disabledMinTime).getTime()) && (options.disabledMaxTime !== false && now.getTime() < _xdsoft_datetime.strtotime(options.disabledMaxTime).getTime()))) {
@@ -2978,15 +2978,15 @@ var DateFormatter;
  */
 
 (function (factory) {
-    if ( typeof define === 'function' && define.amd ) {
+    if ( typeof window === 'object' && typeof jQuery === 'function' ) {
+        // Browser globals
+        factory(jQuery);
+    } else if ( typeof define === 'function' && define.amd ) {
         // AMD. Register as an anonymous module.
         define(['jquery'], factory);
     } else if (typeof exports === 'object') {
         // Node/CommonJS style for Browserify
         module.exports = factory;
-    } else {
-        // Browser globals
-        factory(jQuery);
     }
 }(function ($) {
 
